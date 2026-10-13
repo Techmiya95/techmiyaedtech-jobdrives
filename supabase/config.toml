@@ -1,0 +1,16 @@
+project_id = "techmiya-drive-portal"
+
+[api]
+port = 54321
+extra_search_path = ["public", "extensions"]
+
+[db]
+port = 54322
+
+[storage]
+enabled = true
+
+[auth]
+enabled = true
+site_url = "https://drive.techmiyaedtech.com"
+additional_redirect_urls = ["https://drive.techmiyaedtech.com/#/"]
