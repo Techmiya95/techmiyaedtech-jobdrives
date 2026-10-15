@@ -235,9 +235,9 @@ export default function Ticket() {
                   </span>
                 </div>
 
-                <div className="p-2.5 rounded-xl bg-slate-800/60 border border-slate-700/40">
+                <div className="p-2.5 rounded-xl bg-slate-800/60 border border-slate-700/40 col-span-2 sm:col-span-1">
                   <span className="text-[10px] uppercase font-semibold text-slate-400 block">Venue / Desk</span>
-                  <span className="text-xs font-bold text-slate-200 mt-0.5 block truncate" title={ticket.event_location}>
+                  <span className="text-[11px] leading-snug font-bold text-slate-200 mt-0.5 block" title={ticket.event_location}>
                     {ticket.event_location}
                   </span>
                 </div>

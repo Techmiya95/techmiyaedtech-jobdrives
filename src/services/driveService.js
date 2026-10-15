@@ -1,44 +1,49 @@
 import { supabase, isSupabaseConfigured } from './supabase.js';
 
-const STORAGE_DRIVES_KEY = 'techmiya_portal_drives_v2';
+const STORAGE_DRIVES_KEY = 'techmiya_portal_drives_v4';
 
 export const SAMPLE_DRIVES = [
   {
     id: 'd1000000-0000-0000-0000-000000000001',
-    name: 'Techmiya Placement Drive 2026',
-    organizer: 'Techmiya EdTech Placement Cell',
-    description: 'Flagship campus placement drive connecting graduates with top tier tech MNCs and high-growth Indian tech startups.',
-    package_details: '₹4.50 LPA – ₹10.50 LPA + Performance Incentives',
-    roles_offered: ['Associate Software Engineer', 'Graduate Engineer Trainee (GET)', 'Product Analyst'],
-    skills_required: ['Core Java / Python / C++', 'Data Structures & Algorithms', 'SQL & Database Design', 'Web Technologies', 'Problem Solving'],
-    job_description: 'Techmiya EdTech’s annual campus placement drive brings together premier technology conglomerates and venture-backed product startups to hire the next generation of engineers and analysts. Selected candidates undergo client-specific technical onboarding followed by direct deployment on enterprise application development, cloud infrastructure, and customer engineering.',
+    name: '24/7.ai Hiring Drive - Tech Support',
+    organizer: '24/7.ai',
+    description: 'Exclusive campus recruitment drive by 24/7.ai for Tech Support / Voice Process roles.',
+    package_details: '₹3.95 LPA',
+    roles_offered: ['Tech Support Executive (Voice Process)', 'Technical Support Associate'],
+    skills_required: [
+      'Excellent English Verbal & Communication Skills',
+      'Technical Support & Computer Basics',
+      'Active Listening & Customer Handling',
+      'Analytical & Troubleshooting Ability',
+    ],
+    job_description: 'Campus hiring drive conducted by 24/7.ai for Tech Support (Voice Process). Selected candidates will handle voice queries, troubleshoot technology and customer issues, and deliver technical support for global clients.',
     responsibilities: [
-      'Design, develop, and test software components according to engineering specifications.',
-      'Collaborate with agile cross-functional engineering and QA teams during sprint lifecycles.',
-      'Participate in code reviews, bug fixes, and continuous integration deployments.',
-      'Write clean, modular, and maintainable documentation and unit tests.',
+      'Handle inbound and outbound technical support interactions over the phone (Voice Process).',
+      'Diagnose and troubleshoot hardware, software, and application queries.',
+      'Ensure high first-contact resolution rates and maintain customer delight.',
+      'Log and escalate incidents accurately according to standard operating procedures.',
     ],
     selection_process: [
-      'Round 1: Online Technical & Aptitude Screening (60 mins)',
-      'Round 2: Live Hands-on Coding Assessment (2 Problems)',
-      'Round 3: Technical In-Depth Interview (DSA, System Basics, Projects)',
-      'Round 4: HR Discussion & Offer Rollout',
+      'Round 1: PIR (Preliminary Interview Round)',
+      'Round 2: Harver Assessment',
+      'Round 3: ACM Round',
     ],
-    work_location: 'Bangalore, Hyderabad, Pune (Hybrid / 3 days onsite)',
-    bond_info: 'No Service Bond / Direct Employment',
+    work_location: 'Bengaluru / Onsite',
+    bond_info: 'No Service Bond',
     start_date: new Date(Date.now() - 2 * 86400000).toISOString(),
-    end_date: new Date(Date.now() + 30 * 86400000).toISOString(),
-    event_date: '2026-11-15T09:00:00Z',
-    event_location: 'Techmiya Tech Campus & Virtual Assessment Labs',
+    end_date: new Date(Date.now() + 10 * 86400000).toISOString(),
+    event_date: '2026-10-17T03:30:00Z', // 17th October 2026, 9:00 AM IST
+    event_location: 'Techmiya Ed-Tech, 28th Main Rd, S & C Cross A Road, Jayanagar 9th Block, Bengaluru, Karnataka 560069 (Reporting: 9:00 AM)',
     capacity: 250,
-    registration_count: 18,
+    registration_count: 0,
     eligibility_rules: {
-      accepted_degrees: ['BE / BTech', 'BCA', 'MCA', 'BSc', 'MSc'],
-      accepted_passing_years: ['2024', '2025', '2026'],
-      min_cgpa: '6.5',
+      accepted_degrees: ['BE / BTech', 'BCA', 'BSc', 'BCom', 'BBA', 'BA', 'MCA', 'Any Graduate'],
+      accepted_passing_years: ['2023', '2024', '2025', '2026'],
+      min_cgpa: null,
     },
     is_active: true,
   },
+  /*
   {
     id: 'd1000000-0000-0000-0000-000000000002',
     name: 'Software Developer Hiring Drive',
@@ -249,6 +254,7 @@ export const SAMPLE_DRIVES = [
     },
     is_active: true,
   },
+  */
 ];
 
 function getLocalDrives() {
@@ -264,17 +270,11 @@ function getLocalDrives() {
       const sample = SAMPLE_DRIVES.find((s) => s.id === d.id);
       return sample
         ? {
-            ...sample,
-            ...d,
-            package_details: sample.package_details,
-            roles_offered: sample.roles_offered,
-            skills_required: sample.skills_required,
-            job_description: sample.job_description,
-            responsibilities: sample.responsibilities,
-            selection_process: sample.selection_process,
-            work_location: sample.work_location,
-            bond_info: sample.bond_info,
-          }
+          ...d,
+          ...sample,
+          capacity: d.capacity || sample.capacity,
+          registration_count: d.registration_count || 0,
+        }
         : d;
     });
   } catch (e) {
